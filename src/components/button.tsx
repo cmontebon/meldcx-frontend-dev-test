@@ -14,6 +14,11 @@ const StyledButton = styled.button<{ width?: string }>`
     opacity: 0.5;
   }
 
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
   &.primary {
     background: #368ea6;
     color: white;
