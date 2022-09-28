@@ -7,6 +7,7 @@ const StyledButton = styled.button<{ width?: string }>`
   border-radius: 5px;
   cursor: pointer;
   font-weight: 500;
+  margin: 5px auto;
   width: ${({ width }) => width || "auto"};
 
   &:hover {

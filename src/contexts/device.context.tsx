@@ -1,13 +1,8 @@
-import React, {
-  SetStateAction,
-  Dispatch,
-  createContext,
-  useState,
-} from "react";
-import { useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
+
 import { ApiService } from "../services";
 
-import { DeviceCollection, DeviceItem } from "../types";
+import { DeviceItem } from "../types";
 
 type DeviceContextProps = {
   devices?: DeviceItem[];
@@ -25,7 +20,6 @@ const DeviceContextProvider = ({ children }: DeviceContextProviderProps) => {
   useEffect(() => {
     const deviceFetchInterval = setInterval(() => {
       ApiService.getDevices().then(({ devices }) => {
-        setDevices([]);
         setDevices(devices);
       });
     }, 5000);

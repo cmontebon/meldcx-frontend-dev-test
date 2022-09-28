@@ -1,7 +1,5 @@
-import { SetStateAction } from "react";
-import { useEffect } from "react";
-import { useRef } from "react";
-import { Dispatch } from "react";
+import { SetStateAction, useEffect, useRef, Dispatch } from "react";
+
 import styled from "styled-components";
 
 const StyledInput = styled.input<{ width?: string }>`

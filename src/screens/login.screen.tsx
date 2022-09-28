@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { useContext } from "react";
 import styled from "styled-components";
 
 import { Button, Input } from "../components";
+
 import { AuthContext } from "../contexts/auth.context";
 
 const Wrapper = styled.div`
@@ -15,7 +16,6 @@ const Wrapper = styled.div`
 `;
 
 const LoginContainer = styled.div`
-  border: 1px solid black;
   padding: 30px 50px;
   max-width: 500px;
 `;
@@ -51,7 +51,6 @@ const LoginScreen = () => {
           width="100%"
           value={password}
           setValue={setPassword}
-          error
           placeholder="Password"
         ></Input>
         <Button

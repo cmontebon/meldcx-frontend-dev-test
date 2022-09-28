@@ -1,8 +1,7 @@
 import { useContext } from "react";
-import { useEffect } from "react";
 import styled, { keyframes } from "styled-components";
+
 import { DeviceContext } from "../contexts/device.context";
-import { DeviceCollection, DeviceItem } from "../types";
 
 const SpinRightTransition = keyframes`
   100% {
