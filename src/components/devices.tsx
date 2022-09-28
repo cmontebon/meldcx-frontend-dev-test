@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { useEffect } from "react";
 import styled, { keyframes } from "styled-components";
+import { DeviceContext } from "../contexts/device.context";
 import { DeviceCollection, DeviceItem } from "../types";
 
 const SpinRightTransition = keyframes`
@@ -42,9 +44,20 @@ const DeviceName = styled.span`
   top: 50px;
 `;
 
-const Device: React.FC<DeviceItem> = ({ id, name }) => {
-  const increment = 360 / 5;
-  const rotateValue = 360 + increment * id;
+type DeviceProps = {
+  id: number;
+  name: string;
+  length: number;
+};
+
+const Device: React.FC<DeviceProps> = ({ id, name, length }) => {
+  const increment = 360 / length;
+  const rotateValue = increment * (id + 1);
+
+  console.log("length", length);
+  console.log("id", id);
+  console.log("increment", increment);
+  console.log("increment", rotateValue);
 
   return (
     <DeviceOrbit rotateValue={rotateValue}>
@@ -55,17 +68,20 @@ const Device: React.FC<DeviceItem> = ({ id, name }) => {
   );
 };
 
-const Devices: React.FC<DeviceCollection> = ({ devices }) => {
-  useEffect(() => {
-    console.log(devices);
-  }, []);
+const Devices = () => {
+  const { devices } = useContext(DeviceContext);
 
   return (
     <>
-      <h1>Devices {devices.length}</h1>
+      <div style={{ textAlign: "center" }}>
+        <h1>{devices ? devices.length : 0}</h1>
+        <h3>Devices Online</h3>
+      </div>
 
-      {devices.length &&
-        devices.map((device) => <Device key={device.id} {...device}></Device>)}
+      {devices?.length &&
+        devices.map((device) => (
+          <Device key={device.id} {...device} length={devices.length}></Device>
+        ))}
     </>
   );
 };

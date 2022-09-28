@@ -7,10 +7,6 @@ import { AuthContext } from "../contexts/auth.context";
 function App() {
   const { token } = useContext(AuthContext);
 
-  useEffect(() => {
-    console.log(token);
-  }, [token]);
-
   if (token) {
     return <Devices />;
   } else {
