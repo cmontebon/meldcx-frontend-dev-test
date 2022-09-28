@@ -50,7 +50,7 @@ const Button = ({
       type={type}
       onClick={handleClick}
       className={className}
-      disabled={isLoading && false}
+      disabled={isLoading || false}
       width={width}
     >
       {isLoading && (
