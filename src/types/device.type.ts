@@ -1,8 +1,8 @@
-export interface DeviceItem {
+export type DeviceItem = {
   id: number;
   name: string;
-}
+};
 
-export interface DeviceCollection {
+export type DeviceCollection = {
   devices: DeviceItem[];
-}
+};

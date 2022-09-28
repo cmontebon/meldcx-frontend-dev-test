@@ -26,7 +26,7 @@ const Title = styled.h1`
 `;
 
 const LoginScreen = () => {
-  const { login } = useContext(AuthContext);
+  const { login, loading } = useContext(AuthContext);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -58,7 +58,7 @@ const LoginScreen = () => {
           onClick={handleLogin}
           text="Login"
           width="100%"
-          isLoading={false}
+          isLoading={loading}
         ></Button>
       </LoginContainer>
     </Wrapper>

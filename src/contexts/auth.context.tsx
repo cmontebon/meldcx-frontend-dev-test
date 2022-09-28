@@ -3,24 +3,18 @@ import React, {
   useState,
   Dispatch,
   SetStateAction,
-  ReactElement,
-  Children,
 } from "react";
+import { useEffect } from "react";
 
-type User = {
-  email: string;
-  password: string;
-};
-
-type Token = {
-  token: string | null;
-};
+import { ApiService, LocalStorageService } from "../services";
+import { AuthUser } from "../types";
 
 type AuthContextProps = {
-  token?: Token;
-  setToken?: Dispatch<SetStateAction<Token>>;
-  login: (payload: User) => void;
+  token?: string;
+  setToken?: Dispatch<SetStateAction<string>>;
+  login: (payload: AuthUser) => void;
   logout: () => void;
+  loading: boolean;
 };
 
 type AuthContextProviderProps = {
@@ -30,19 +24,35 @@ type AuthContextProviderProps = {
 const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
 
 const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
-  const [token, setToken] = useState<Token | undefined>();
+  const [token, setToken] = useState<string | undefined>();
+  const [loading, setLoading] = useState<boolean>(false);
+  const savedToken = LocalStorageService.getToken();
 
-  const login = (payload: User) => {
-    const tempToken: Token = "abc" as unknown as Token;
-    setToken(tempToken);
+  useEffect(() => {
+    if (!savedToken) return;
+    setToken(savedToken);
+  }, [savedToken]);
+
+  const login = (payload: AuthUser) => {
+    setLoading(true);
+    ApiService.login(payload)
+      .then((token) => {
+        setToken(token);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log(error);
+      });
   };
 
   const logout = () => {
     setToken(undefined);
+    LocalStorageService.unsetToken();
   };
 
   return (
-    <AuthContext.Provider value={{ token, login, logout }}>
+    <AuthContext.Provider value={{ token, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );
