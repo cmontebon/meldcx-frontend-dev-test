@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { useContext } from "react";
 import styled from "styled-components";
 
-import { Button, Devices } from "../components";
+import { Button, Devices, NotifyPopup } from "../components";
 
 import { AuthContext } from "../contexts/auth.context";
 import { DeviceContextProvider } from "../contexts/device.context";
@@ -31,14 +32,18 @@ const Footer = styled.div`
 
 const DevicesScreen = () => {
   const { logout } = useContext(AuthContext);
+  const [openPopup, setOpenPopup] = useState<boolean>(false);
+
   return (
     <DeviceContextProvider>
+      {openPopup && <NotifyPopup close={() => setOpenPopup(false)} />}
+
       <Container>
         <DeviceContainer>
           <Devices />
         </DeviceContainer>
         <Footer>
-          <Button text="NOTIFY" onClick={() => console.log("notify")}></Button>
+          <Button text="NOTIFY" onClick={() => setOpenPopup(true)}></Button>
           <Button text="LOGOUT" onClick={logout}></Button>
         </Footer>
       </Container>

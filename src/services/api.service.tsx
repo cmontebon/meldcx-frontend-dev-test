@@ -1,4 +1,5 @@
-import { AuthUser } from "../types";
+import { AuthUser, NotifyPayload } from "../types";
+
 import { AxiosService } from "./axios.service";
 import { LocalStorageService } from "./local-storage.service";
 
@@ -20,7 +21,13 @@ const login = async (payload: AuthUser) => {
   }
 };
 
+const notify = async (payload: NotifyPayload) => {
+  const response = await axiosInstance.post("notify", payload);
+  return response;
+};
+
 export const ApiService = {
   getDevices,
   login,
+  notify,
 };

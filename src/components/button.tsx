@@ -1,4 +1,3 @@
-import { MouseEventHandler } from "react";
 import styled from "styled-components";
 
 const StyledButton = styled.button<{ width?: string }>`
@@ -8,7 +7,7 @@ const StyledButton = styled.button<{ width?: string }>`
   border-radius: 5px;
   cursor: pointer;
   font-weight: 500;
-  margin: 5px auto;
+  margin: 5px;
   width: ${({ width }) => width || "auto"};
 
   &:hover {
@@ -51,7 +50,7 @@ const Button = ({
       type={type}
       onClick={handleClick}
       className={className}
-      disabled={isLoading || false}
+      disabled={isLoading && false}
       width={width}
     >
       {isLoading && (

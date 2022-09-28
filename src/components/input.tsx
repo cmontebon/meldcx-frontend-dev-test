@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const StyledInput = styled.input<{ width?: string }>`
   padding: 10px 5px;
-  margin: 5px auto;
+  margin: 5px;
   width: ${({ width }) => width || "auto"};
   border-radius: 5px;
   border: 1px solid #d4d4d4;
