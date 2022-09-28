@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from "react";
 
+import { Devices, Login } from "../screens";
+
 import { AuthContext } from "../contexts/auth.context";
 
 function App() {
@@ -10,9 +12,9 @@ function App() {
   }, [token]);
 
   if (token) {
-    return <h1>with token</h1>;
+    return <Devices />;
   } else {
-    return <h1>without token</h1>;
+    return <Login />;
   }
 }
 
