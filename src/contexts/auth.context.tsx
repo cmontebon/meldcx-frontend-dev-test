@@ -6,7 +6,7 @@ import React, {
 } from "react";
 import { useEffect } from "react";
 
-import { ApiService, LocalStorageService } from "../services";
+import { ApiService, LocalStorageService, AxiosService } from "../services";
 import { AuthUser } from "../types";
 
 type AuthContextProps = {
@@ -31,6 +31,7 @@ const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   useEffect(() => {
     if (!savedToken) return;
     setToken(savedToken);
+    AxiosService.setAuthorizationHeader(savedToken);
   }, [savedToken]);
 
   const login = (payload: AuthUser) => {
