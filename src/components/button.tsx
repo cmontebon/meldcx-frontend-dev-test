@@ -1,3 +1,4 @@
+import { MouseEventHandler } from "react";
 import styled from "styled-components";
 
 const StyledButton = styled.button<{ width?: string }>`
@@ -25,19 +26,21 @@ const StyledButton = styled.button<{ width?: string }>`
 `;
 
 type ButtonProps = {
-  onClick: () => void;
-  type?: "primary" | "error";
+  onClick?: () => void;
+  className?: "primary" | "error";
+  type?: "button" | "submit";
   isLoading?: boolean;
   text: string;
   width?: string;
 };
 
 const Button = ({
-  onClick,
-  type,
+  className,
   isLoading,
   width,
   text = "",
+  type = "button",
+  onClick = () => {},
 }: ButtonProps) => {
   const handleClick = () => {
     onClick();
@@ -45,9 +48,9 @@ const Button = ({
 
   return (
     <StyledButton
-      type="button"
+      type={type}
       onClick={handleClick}
-      className={type}
+      className={className}
       disabled={isLoading || false}
       width={width}
     >

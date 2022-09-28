@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useContext } from "react";
+import { FormEvent, useState, useContext } from "react";
 import styled from "styled-components";
 
 import { Button, Input } from "../components";
@@ -30,7 +29,8 @@ const LoginScreen = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const handleLogin = () => {
+  const handleLogin = (e: FormEvent) => {
+    e.preventDefault();
     login({ email, password });
   };
 
@@ -38,27 +38,29 @@ const LoginScreen = () => {
     <Wrapper>
       <LoginContainer>
         <Title>Login</Title>
-        <Input
-          type="text"
-          width="100%"
-          value={email}
-          setValue={setEmail}
-          autofocus={true}
-          placeholder="Email"
-        ></Input>
-        <Input
-          type="password"
-          width="100%"
-          value={password}
-          setValue={setPassword}
-          placeholder="Password"
-        ></Input>
-        <Button
-          onClick={handleLogin}
-          text="Login"
-          width="100%"
-          isLoading={loading}
-        ></Button>
+        <form onSubmit={(e) => handleLogin(e)}>
+          <Input
+            type="text"
+            width="100%"
+            value={email}
+            setValue={setEmail}
+            autofocus={true}
+            placeholder="Email"
+          ></Input>
+          <Input
+            type="password"
+            width="100%"
+            value={password}
+            setValue={setPassword}
+            placeholder="Password"
+          ></Input>
+          <Button
+            type="submit"
+            text="Login"
+            width="100%"
+            isLoading={loading}
+          ></Button>
+        </form>
       </LoginContainer>
     </Wrapper>
   );
