@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import styled, { keyframes } from "styled-components";
+import { v4 as uuidv4 } from "uuid";
 
 import { DeviceContext } from "../contexts/device.context";
 
@@ -53,11 +54,6 @@ const Device: React.FC<DeviceProps> = ({ id, name, length }) => {
   const increment = 360 / length;
   const rotateValue = increment * (id + 1);
 
-  console.log("length", length);
-  console.log("id", id);
-  console.log("increment", increment);
-  console.log("increment", rotateValue);
-
   return (
     <DeviceOrbit rotateValue={rotateValue}>
       <CircularDiv rotateValue={rotateValue}>
@@ -79,7 +75,7 @@ const Devices = () => {
 
       {devices?.length &&
         devices.map((device) => (
-          <Device key={device.id} {...device} length={devices.length}></Device>
+          <Device key={uuidv4()} {...device} length={devices.length}></Device>
         ))}
     </>
   );
